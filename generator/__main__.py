@@ -1,4 +1,5 @@
 import argparse
+from .password import PasswordPromptAction
 import os
 import shutil
 
@@ -18,7 +19,7 @@ lessons_template = env.get_template('lessons.jinja2')
 
 parser = argparse.ArgumentParser(description="yandex lyceum docs generator")
 parser.add_argument('--login', type=str, required=True)
-parser.add_argument('--password', type=str, required=True)
+parser.add_argument('--password', action=PasswordPromptAction, type=str, required=True)
 args = parser.parse_args()
 
 client = Client(login=args.login,
