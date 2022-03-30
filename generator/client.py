@@ -45,9 +45,6 @@ class Client:
 
     def get_materials_id(self, lesson_id):
         url = 'https://lyceum.yandex.ru/api/materials'
-        if not (
-                material_info := self.session.get(url, params={'lessonId': lesson_id}).json()
-        ):
-            return 0
+        material_info = self.session.get(url, params={'lessonId': lesson_id}).json()
         return [{'id': material['id'], 'title': material['title']} for material in material_info if
-                material['type'] == 'textbook']
+                material['type'] == 'textbook'] if material_info else 0
